@@ -2,7 +2,7 @@
   <div class="job-list">
     <p>Ordered by {{ order }}</p>
     <ul>
-      <li v-for="job in jobs" :key="job.id">
+      <li v-for="job in orderedJobs" :key="job.id">
         <h2>{{ job.title }} in {{ job.location }}</h2>
         <div class="salary">
           <p>${{ job.salary }}</p>
@@ -21,9 +21,18 @@
 </template>
 
 <script setup lang="ts">
-import jobs from '../types/Job'
+import { computed } from 'vue'
+import { Job, jobs } from '../types/Job'
+import OrderTerm from '../types/OrderTerm'
 
 const props = defineProps(['order'])
+
+const orderedJobs = computed(() => {
+  return [...jobs].sort((a: Job, b: Job) => {
+    const orderTerm: OrderTerm = props.order
+    return a[orderTerm] > b[orderTerm] ? 1 : -1
+  })
+})
 </script>
 
 <style scoped>

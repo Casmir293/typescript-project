@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import jobs from '../src/types/Job'
+import { jobs } from '../src/types/Job'
 import OrderTerm from '../src/types/OrderTerm'
 import JobsList from './components/JobsList.vue'
 
